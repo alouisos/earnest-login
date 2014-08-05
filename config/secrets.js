@@ -18,13 +18,13 @@
 
 module.exports = {
 
-  db: process.env.MONGODB|| 'mongodb://localhost:27017/test',
+  db: process.env.MONGODB|| 'mongodb://alouisos:rinux123@novus.modulusmongo.net:27017/bUxor9ur',
 
   sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
 
   mailgun: {
-    user: process.env.MAILGUN_USER || 'postmaster@sandbox697fcddc09814c6b83718b9fd5d4e5dc.mailgun.org',
-    password: process.env.MAILGUN_PASSWORD || '29eldds1uri6'
+    user: process.env.MAILGUN_USER || 'postmaster@sandbox11dfa4e29a3c45498d5c4b17ac0b7f54.mailgun.org',
+    password: process.env.MAILGUN_PASSWORD || '434b935d3427f56381ee65c3bfd5393e'
   },
   
   mandrill: {

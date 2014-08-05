@@ -12,7 +12,7 @@ var secrets = require('../config/secrets');
  */
 
 exports.getLogin = function(req, res) {
-  if (req.user) return res.redirect('/');
+  if (req.user) return res.redirect('/login-earnest');
   res.render('account/login', {
     title: 'Login'
   });
@@ -33,14 +33,14 @@ exports.postLogin = function(req, res, next) {
 
   if (errors) {
     req.flash('errors', errors);
-    return res.redirect('/login');
+    return res.redirect('/login-earnest');
   }
 
   passport.authenticate('local', function(err, user, info) {
     if (err) return next(err);
     if (!user) {
       req.flash('errors', { msg: info.message });
-      return res.redirect('/login');
+      return res.redirect('/login-earnest');
     }
     req.logIn(user, function(err) {
       if (err) return next(err);
@@ -57,7 +57,7 @@ exports.postLogin = function(req, res, next) {
 
 exports.logout = function(req, res) {
   req.logout();
-  res.redirect('/');
+  res.redirect('/login-earnest');
 };
 
 /**
@@ -275,16 +275,16 @@ exports.postReset = function(req, res, next) {
     },
     function(user, done) {
       var transporter = nodemailer.createTransport({
-        service: 'SendGrid',
+        service: 'Mailgun',
         auth: {
-          user: secrets.sendgrid.user,
-          pass: secrets.sendgrid.password
+          user: secrets.mailgun.user,
+          pass: secrets.mailgun.password
         }
       });
       var mailOptions = {
         to: user.email,
-        from: 'hackathon@starter.com',
-        subject: 'Your Hackathon Starter password has been changed',
+        from: 'lal42@medschl.cam.ac.uk',
+        subject: 'Your CCTU password has been changed',
         text: 'Hello,\n\n' +
           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };
@@ -353,16 +353,16 @@ exports.postForgot = function(req, res, next) {
     },
     function(token, user, done) {
       var transporter = nodemailer.createTransport({
-        service: 'SendGrid',
+        service: 'Mailgun',
         auth: {
-          user: secrets.sendgrid.user,
-          pass: secrets.sendgrid.password
+          user: secrets.mailgun.user,
+          pass: secrets.mailgun.password
         }
       });
       var mailOptions = {
         to: user.email,
-        from: 'hackathon@starter.com',
-        subject: 'Reset your password on Hackathon Starter',
+        from: 'lal42@medschl.cam.ac.uk',
+        subject: 'Reset your password on CCTU Website',
         text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
           'http://' + req.headers.host + '/reset/' + token + '\n\n' +
