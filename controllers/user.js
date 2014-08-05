@@ -283,7 +283,7 @@ exports.postReset = function(req, res, next) {
       });
       var mailOptions = {
         to: user.email,
-        from: 'lal42@medschl.cam.ac.uk',
+        from: 'cctu@medschl.cam.ac.uk',
         subject: 'Your CCTU password has been changed',
         text: 'Hello,\n\n' +
           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
@@ -361,7 +361,7 @@ exports.postForgot = function(req, res, next) {
       });
       var mailOptions = {
         to: user.email,
-        from: 'lal42@medschl.cam.ac.uk',
+        from: 'cctu@medschl.cam.ac.uk',
         subject: 'Reset your password on CCTU Website',
         text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
