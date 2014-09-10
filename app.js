@@ -66,7 +66,7 @@ var csrfExclude = ['/url1', '/url2'];
  * Express configuration.
  */
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 80);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(compress());
@@ -116,8 +116,11 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: week }));
 /**
  * Main routes.
  */
+app.get('/', function(req, res) {
+    res.render('index.ejs');
+  });
+app.get('/loggedin-earnest', passportConf.isAuthenticated, homeController.index);
 
-app.get('/', passportConf.isAuthenticated, homeController.index);
 app.get('/login-earnest', userController.getLogin);
 app.post('/login-earnest', userController.postLogin);
 app.get('/logout', userController.logout);
@@ -127,13 +130,117 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
-app.get('/contact', contactController.getContact);
-app.post('/contact', contactController.postContact);
+// app.get('/contact', contactController.getContact);
+// app.post('/contact', contactController.postContact);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
+
+
+app.get('/services', function(req,res) { 
+    res.render('services.ejs')
+  });
+
+  app.get('/contact', function(req, res) { 
+    res.render('contact.ejs')
+  });
+
+  app.get('/rescue-asdh', function(req, res) { 
+    res.render('rescue-asdh.ejs')
+
+  }); 
+  
+  app.get('/rescue-asdh-IE', function(req, res) { 
+    res.render('rescue-asdh-IE.ejs')
+
+  }); 
+
+
+  app.get('/CCTU-portfolio', function(req, res) { 
+    res.render('CCTU-portfolio.ejs')
+  });
+
+  // PROFILE SECTION =========================
+  
+
+
+app.get('/earnest', function(req, res) { 
+  res.render('earnest.ejs')
+  }); 
+
+app.get('/erica-study', function(req,res) { 
+  res.render('erica-study.ejs')
+}); 
+
+app.get('/cctu-cardio', function(req,res) { 
+    res.render('cctu-cardio.ejs')
+});
+
+app.get('/cctu-cancer', function(req, res) { 
+    res.render('cctu-cancer.ejs')
+}); 
+
+app.get('/cctu-surgery', function(req, res) { 
+    res.render('cctu-surgery.ejs')
+}); 
+
+app.get('/cctu-paediatrics', function(req,res){ 
+    res.render('cctu-paediatrics.ejs')
+    }); 
+app.get('/cctu-other', function(req,res){ 
+    res.render('cctu-other.ejs')
+  });
+
+app.get('/cctu-news', function(req,res) { 
+  res.render('cctu-news.ejs')
+});
+
+app.get('/cctu-vasculitis', function(req,res) {
+    res.render('cctu-vasculitis.ejs')
+  });
+
+app.get('/erica-stratified', function(req, res) { 
+  res.render("erica-stratified.ejs"); 
+  }); 
+
+app.get('/erica', function(req,res) { 
+  res.render('erica.ejs')
+  }); 
+
+
+// =============================================================================
+// AUTHENTICATE (FIRST LOGIN) ==================================================
+// =============================================================================
+
+  // locally --------------------------------
+    // LOGIN ===============================
+  
+ 
+
+      // locally --------------------------------
+    // LOGIN ===============================
+ 
+
+      // locally --------------------------------
+    // LOGIN ===============================
+    // show the login form
+
+    // process the login form
+  
+    // SIGNUP =================================
+    // show the signup form
+
+    // process the signup form
+
+
+    //Forgot Password 
+
+
+app.use(function (req, res) { 
+  res.render('404')
+});
 
 /**
  * API examples routes.
